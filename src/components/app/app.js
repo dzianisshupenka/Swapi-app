@@ -4,6 +4,7 @@ import RandomPlanet from "../random-planet";
 import ItemList from "../item-list";
 
 import './app.css'
+import PersonDetails from "../person-details";
 
 export default class App extends Component {
     render() {
@@ -11,6 +12,7 @@ export default class App extends Component {
             <Header/>
             <RandomPlanet />
             <ItemList />
+            <PersonDetails />
         </div>
     }
 }
