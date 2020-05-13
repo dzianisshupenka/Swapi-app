@@ -8,6 +8,11 @@
     background-color: #0d1113;
 }
 
+.bolder {
+    font-weight: bolder;
+    color: #c6fff8;
+}
+
 .random-planet img {
     width: 250px;
     margin-right: 30px;
