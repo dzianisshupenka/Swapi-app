@@ -1,0 +1,8 @@
+.item-list{
+    margin: 55px;
+    width: 70%;
+}
+
+.item-list li{
+    font-size: 25px;
+}
