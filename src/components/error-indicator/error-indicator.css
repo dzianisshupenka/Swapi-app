@@ -1,0 +1,17 @@
+.error {
+    display: block;
+    text-align: center;
+    font-size: 30px;
+    color: #e5d100;
+}
+
+.main-error {
+    margin: 0 auto;
+}
+
+.error-message {
+    display: block;
+    text-align: center;
+    font-size: 35px;
+    color: crimson;
+}
