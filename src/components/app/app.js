@@ -9,7 +9,7 @@ import PersonDetails from "../person-details";
 export default class App extends Component {
 
     state ={
-        selectedPerson: null
+        selectedPerson: 1
     }
 
     onItemSelected= (id) => {
@@ -24,7 +24,7 @@ export default class App extends Component {
             <RandomPlanet />
             <div className='person-list'>
                 <ItemList onItemSelected={this.onItemSelected}/>
-                <PersonDetails />
+                <PersonDetails personId={this.state.selectedPerson} />
             </div>
         </div>
     }
