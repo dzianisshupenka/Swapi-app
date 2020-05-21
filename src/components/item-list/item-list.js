@@ -1,15 +1,12 @@
 import React, {Component} from "react";
 import './item-list.css'
-import SwapiService from "../../service/swapi-service";
 import Spinner from "../spinner";
 import ErrorIndicator from "../error-indicator";
 
 export default class ItemList extends Component {
 
-    swapiService = new SwapiService();
-
     state = {
-        personList : null,
+        itemList : null,
         loading: true,
         error: false
     };
@@ -21,33 +18,35 @@ export default class ItemList extends Component {
         } )
     }
 
-    onPersonListLoaded = (personList) => {
+    onPersonListLoaded = (itemList) => {
         this.setState({
-            personList,
+            itemList,
             loading: false
         })
     }
 
     componentDidMount() {
-        this.swapiService
-            .getAllPeople()
+       const { getData } = this.props;
+            getData()
             .then(this.onPersonListLoaded)
             .catch(() => this.onError())
     }
 
     rend(arr) {
-        return arr.map(({id, name})=>{
+        return arr.map((item)=>{
+            const { id } = item;
+            const label = this.props.children(item);
             return <li key={id}
                        className='list-group-item list-group-item-action'
-                       onClick={() => this.props.onItemSelected(id)} >{name}</li>
+                       onClick={() => this.props.onItemSelected(id)} >{label}</li>
         })
     }
 
     render() {
-        const { personList, loading, error } = this.state;
+        const { itemList, loading, error } = this.state;
         const errorMessage = error ? <ErrorIndicator/> : null
         const spinner = loading ? <Spinner/> : null
-        const items = personList ? this.rend(personList): null
+        const items = itemList ? this.rend(itemList): null
 
         return <div className='item-list'>
             <ul className='list-group'>

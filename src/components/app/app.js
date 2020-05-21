@@ -4,28 +4,23 @@ import RandomPlanet from "../random-planet";
 import ItemList from "../item-list";
 
 import './app.css'
-import PersonDetails from "../person-details";
+import ItemDetails from "../item-details";
+import SwapiService from "../../service/swapi-service";
+import PeoplePage from "../people-page";
 
 export default class App extends Component {
 
-    state ={
-        selectedPerson: 1
-    }
+    swapiService = new SwapiService();
 
-    onItemSelected= (id) => {
-        this.setState({
-            selectedPerson: id
-        })
+    state = {
+
     }
 
     render() {
         return <div className='main'>
             <Header/>
             <RandomPlanet />
-            <div className='person-list'>
-                <ItemList onItemSelected={this.onItemSelected}/>
-                <PersonDetails personId={this.state.selectedPerson} />
-            </div>
+            <PeoplePage/>
         </div>
     }
 }

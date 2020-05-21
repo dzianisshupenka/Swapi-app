@@ -5,18 +5,18 @@ import SwapiService from "../../service/swapi-service";
 import ErrorIndicator from "../error-indicator";
 import Spinner from "../spinner";
 
-export default class PersonDetails extends Component {
+export default class ItemDetails extends Component {
 
     swapiService = new SwapiService();
 
     state = {
         person: null,
-        loading: true,
+        loading: false,
         error: false
     }
 
     componentDidMount() {
-        if (this.state.person) {
+        if (!this.state.person) {
             return;
         }
 
@@ -73,13 +73,17 @@ export default class PersonDetails extends Component {
 
 const PersonView = ({person}) => {
 
+    if (!person) {
+        return <span>Select a person from a list</span>;
+    }
+
     const { id, name, gender, birthYear, eyeColor } = person;
         return <React.Fragment>
             <div>
-                <img src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} alt={`character ${id}`}/>
-            </div>
-            <div>
                 <h4>{name}</h4>
+            </div>
+            <div className='img-list'>
+                <img src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} alt={`character ${id}`}/>
                 <ul className='list-group'>
                     <li className='list-group-item list-group-item-action'>
                         <span className='bolder'>Gender </span>

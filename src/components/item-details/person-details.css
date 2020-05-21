@@ -1,13 +1,14 @@
 .person-details {
     border-radius: 5px;
     margin: 55px;
-    width: 40%;
-    height: 350px;
-    display: flex;
-    flex-direction: row;
     padding: 20px;
     background-color: #0d1113;
     border: #384e4c solid;
+}
+
+.img-list {
+    display: flex;
+    flex-direction: row;
 }
 
 .person-details img {
