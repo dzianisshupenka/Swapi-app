@@ -5,6 +5,27 @@ import SwapiService from "../../service/swapi-service";
 import ErrorIndicator from "../error-indicator";
 import Spinner from "../spinner";
 
+class ErrorButton extends Component {
+
+    state = {
+        renderError: false
+    };
+
+    render() {
+        if (this.state.renderError) {
+            this.foo.bar = 0;
+        }
+
+        return (
+            <button
+                className="error-button btn btn-danger btn-lg"
+                onClick={() => this.setState({renderError: true})}>
+                Throw Error
+            </button>
+        );
+    }
+}
+
 export default class ItemDetails extends Component {
 
     swapiService = new SwapiService();
@@ -99,5 +120,6 @@ const PersonView = ({person}) => {
                     </li>
                 </ul>
             </div>
+            <ErrorButton/>
         </React.Fragment>
 }

@@ -3,6 +3,7 @@ import ItemList from "../item-list";
 import ItemDetails from "../item-details";
 import SwapiService from "../../service/swapi-service";
 import Row from "../row";
+import ErrorBoundary from "../error-boundary";
 
 export default class PeoplePage extends Component {
 
@@ -20,14 +21,16 @@ export default class PeoplePage extends Component {
 
     render() {
 
-        const personDetails = <ItemDetails personId={this.state.selectedPerson}/>
+        const personDetails = <ErrorBoundary>
+                                    <ItemDetails personId={this.state.selectedPerson}/>
+                                </ErrorBoundary>
 
         const itemList = <ItemList onItemSelected={this.onItemSelected}
                                    getData={this.swapiService.getAllPeople}>
                                      {(i) => (`${i.name} (Birth year: ${i.birthYear})`)}
                         </ItemList>
-
-        return <Row left={itemList} right={personDetails}/>
-
+        return  <ErrorBoundary>
+                    <Row left={itemList} right={personDetails}/>
+                </ErrorBoundary>
     }
 }
