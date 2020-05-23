@@ -31,9 +31,10 @@ export default class ItemDetails extends Component {
     swapiService = new SwapiService();
 
     state = {
-        person: null,
+        person: {},
         loading: false,
-        error: false
+        error: false,
+        img: null
     }
 
     componentDidMount() {
@@ -58,7 +59,8 @@ export default class ItemDetails extends Component {
     onPersonLoaded = (person) => {
         this.setState( {
             person,
-            loading: false
+            loading: false,
+            img: this.props.getImgUrl(person)
         })
     }
 
@@ -70,18 +72,18 @@ export default class ItemDetails extends Component {
     }
 
     updatePerson() {
-        const { personId } = this.props;
-        this.swapiService.getPerson(personId)
+        const { personId, getData } = this.props;
+        getData(personId)
             .then(this.onPersonLoaded)
             .catch(() => this.onError())
     }
 
     render() {
-        const {error, loading, person} = this.state
+        const {error, loading, person, img} = this.state
         const hasData = !( loading || error ) ;
         const spinner = loading ? <Spinner/> : null
         const errorMessage = error ? <ErrorIndicator/> : null
-        const personData = hasData ? <PersonView person={person}/> : null
+        const personData = hasData ? <PersonView person={person} img={img}/> : null
 
 
         return <div className='person-details'>
@@ -92,7 +94,7 @@ export default class ItemDetails extends Component {
     }
 }
 
-const PersonView = ({person}) => {
+const PersonView = ({person, img}) => {
 
     if (!person) {
         return <span>Select a person from a list</span>;
@@ -104,19 +106,19 @@ const PersonView = ({person}) => {
                 <h4>{name}</h4>
             </div>
             <div className='img-list'>
-                <img src={`https://starwars-visualguide.com/assets/img/characters/${id}.jpg`} alt={`character ${id}`}/>
+                <img src={img} alt={`character ${id}`}/>
                 <ul className='list-group'>
                     <li className='list-group-item list-group-item-action'>
                         <span className='bolder'>Gender </span>
-                        <span>{gender}</span>
+                        <span>{gender ? gender: ""}</span>
                     </li>
                     <li className='list-group-item list-group-item-action'>
                         <span className='bolder'>Birth Year </span>
-                        <span>{birthYear}</span>
+                        <span>{birthYear ? birthYear : ""}</span>
                     </li>
                     <li className='list-group-item list-group-item-action'>
                         <span className='bolder'>Eye color </span>
-                        <span>{eyeColor}</span>
+                        <span>{eyeColor  ? eyeColor : ""}</span>
                     </li>
                 </ul>
             </div>

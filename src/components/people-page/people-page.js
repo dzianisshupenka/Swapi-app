@@ -22,15 +22,16 @@ export default class PeoplePage extends Component {
     render() {
 
         const personDetails = <ErrorBoundary>
-                                    <ItemDetails personId={this.state.selectedPerson}/>
+                                    <ItemDetails personId={this.state.selectedPerson}
+                                                 getData={this.swapiService.getPerson}
+                                                 getImgUrl={this.swapiService.getPersonImage}   />
                                 </ErrorBoundary>
 
         const itemList = <ItemList onItemSelected={this.onItemSelected}
                                    getData={this.swapiService.getAllPeople}>
                                      {(i) => (`${i.name} (Birth year: ${i.birthYear})`)}
                         </ItemList>
-        return  <ErrorBoundary>
-                    <Row left={itemList} right={personDetails}/>
-                </ErrorBoundary>
+        return  <Row left={itemList} right={personDetails}/>
+
     }
 }
