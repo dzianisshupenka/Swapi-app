@@ -86,9 +86,9 @@ export default class ItemDetails extends Component {
     }
 
     render() {
-        debugger
+
         const {person, img} = this.state;
-        const {name, id, gender, birthYear, eyeColor } = person;
+        const {name, id} = person;
         return <div className='person-details'>
                     <div>
                         <h4>{name}</h4>
@@ -97,8 +97,8 @@ export default class ItemDetails extends Component {
                         <img src={img} alt={`character ${id}`}/>
                         <ul className='list-group'>
                             {
-                                React.Children.map(this.props.children, (ch) => {
-                                    return React.cloneElement(ch, {person})
+                                React.Children.map(this.props.children, (child) => {
+                                    return React.cloneElement(child, {person})
                                 })
                             }
                         </ul>
