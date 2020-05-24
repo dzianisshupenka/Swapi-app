@@ -1,9 +1,18 @@
 import React, {Component} from "react";
-
 import './person-details.css'
-import SwapiService from "../../service/swapi-service";
-import ErrorIndicator from "../error-indicator";
-import Spinner from "../spinner";
+
+const Record = ( {person, item, label} ) => {
+    return(
+        <li className='list-group-item list-group-item-action'>
+            <span className='bolder'>{label}</span>
+            <span>{person[item]}</span>
+        </li>
+    )
+}
+
+export {
+    Record
+}
 
 class ErrorButton extends Component {
 
@@ -27,8 +36,6 @@ class ErrorButton extends Component {
 }
 
 export default class ItemDetails extends Component {
-
-    swapiService = new SwapiService();
 
     state = {
         person: {},
@@ -79,49 +86,24 @@ export default class ItemDetails extends Component {
     }
 
     render() {
-        const {error, loading, person, img} = this.state
-        const hasData = !( loading || error ) ;
-        const spinner = loading ? <Spinner/> : null
-        const errorMessage = error ? <ErrorIndicator/> : null
-        const personData = hasData ? <PersonView person={person} img={img}/> : null
-
-
+        debugger
+        const {person, img} = this.state;
+        const {name, id, gender, birthYear, eyeColor } = person;
         return <div className='person-details'>
-            {spinner}
-            {errorMessage}
-            {personData}
-        </div>
+                    <div>
+                        <h4>{name}</h4>
+                    </div>
+                    <div className='img-list'>
+                        <img src={img} alt={`character ${id}`}/>
+                        <ul className='list-group'>
+                            {
+                                React.Children.map(this.props.children, (ch) => {
+                                    return React.cloneElement(ch, {person})
+                                })
+                            }
+                        </ul>
+                    </div>
+                    <ErrorButton/>
+                </div>
     }
-}
-
-const PersonView = ({person, img}) => {
-
-    if (!person) {
-        return <span>Select a person from a list</span>;
-    }
-
-    const { id, name, gender, birthYear, eyeColor } = person;
-        return <React.Fragment>
-            <div>
-                <h4>{name}</h4>
-            </div>
-            <div className='img-list'>
-                <img src={img} alt={`character ${id}`}/>
-                <ul className='list-group'>
-                    <li className='list-group-item list-group-item-action'>
-                        <span className='bolder'>Gender </span>
-                        <span>{gender ? gender: ""}</span>
-                    </li>
-                    <li className='list-group-item list-group-item-action'>
-                        <span className='bolder'>Birth Year </span>
-                        <span>{birthYear ? birthYear : ""}</span>
-                    </li>
-                    <li className='list-group-item list-group-item-action'>
-                        <span className='bolder'>Eye color </span>
-                        <span>{eyeColor  ? eyeColor : ""}</span>
-                    </li>
-                </ul>
-            </div>
-            <ErrorButton/>
-        </React.Fragment>
 }
