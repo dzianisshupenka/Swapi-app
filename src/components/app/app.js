@@ -17,9 +17,9 @@ export default class App extends Component {
             <Header/>
             <RandomPlanet />
             {/*<PeoplePage/>*/}
-            <Row left={<PersonList>{(i) => (`${i.name}`)}</PersonList>} right={<PersonDetails id={5}/>}/>
-            <Row left={<PlanetList>{(i) => (`${i.name}`)}</PlanetList>} right={<PlanetDetails id={8}/>}/>
-            <Row left={<StarshipList>{(i) => (`${i.name}`)}</StarshipList>} right={<StarshipDetails id={10}/>}/>
+            <Row left={<PersonList />} right={<PersonDetails id={5}/>}/>
+            <Row left={<PlanetList />} right={<PlanetDetails id={8}/>}/>
+            <Row left={<StarshipList />} right={<StarshipDetails id={10}/>}/>
         </div>
     }
 }
