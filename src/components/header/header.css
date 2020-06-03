@@ -22,3 +22,9 @@
 .nav ul li {
     margin-left: 50px;
 }
+
+ul button {
+    margin-left: 15px;
+    height: 40px;
+    margin-top: 7px;
+}

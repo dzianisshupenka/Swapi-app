@@ -14,10 +14,20 @@ const WithData = (View) => {
             })
         }
 
-        componentDidMount() {
+        update = () => {
             this.props.getData()
                 .then(this.onPersonListLoaded)
                 .catch(() => this.onError())
+        }
+
+        componentDidUpdate(prevProps, prevState) {
+            if(this.props.getData !== prevProps.getData) {
+                this.update()
+            }
+        }
+
+        componentDidMount() {
+            this.update();
         }
 
         render () {
