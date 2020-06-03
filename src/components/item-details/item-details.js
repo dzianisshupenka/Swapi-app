@@ -79,8 +79,8 @@ export default class ItemDetails extends Component {
     }
 
     updatePerson() {
-        const { personId, getData } = this.props;
-        getData(personId)
+        const { itemId, getData } = this.props;
+        getData(itemId)
             .then(this.onPersonLoaded)
             .catch(() => this.onError())
     }
