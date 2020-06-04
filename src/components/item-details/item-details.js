@@ -38,25 +38,21 @@ class ErrorButton extends Component {
 export default class ItemDetails extends Component {
 
     state = {
-        person: {},
+        person: null,
         loading: false,
         error: false,
         img: null
     }
 
     componentDidMount() {
-        if (!this.state.person) {
-            return;
-        }
-
         this.updatePerson();
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if(this.props.personId !== prevProps.personId ||
+        if(this.props.itemId !== prevProps.itemId ||
            this.props.getData !== prevProps.getData ||
            this.props.getImgUrl !== prevProps.getImgUrl) {
-            if (prevState.loading == false) {
+            if (prevState.loading === false) {
                 this.setState({
                     loading: true
                 })
@@ -90,6 +86,9 @@ export default class ItemDetails extends Component {
     render() {
 
         const {person, img} = this.state;
+        if(!person) {
+            return <div className='person-details'>Select item please</div>
+        }
         const {name, id} = person;
         return <div className='person-details'>
                     <div>
