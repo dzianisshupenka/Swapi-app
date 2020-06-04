@@ -24,7 +24,7 @@ const mapStarshipsMethodsToProps = (swapiService) => {
     }
 };
 
-const Wrapped = (Item, fn) => {
+const Wrapped = (Item) => (fn) => {
     return (props) => {
         return <Item {...props}>
                     {fn}
@@ -32,9 +32,9 @@ const Wrapped = (Item, fn) => {
     }
 }
 
-const PersonList = WithSwapiService(WithData(Wrapped(ItemList, renderName)), mapPersonMethodsToProps) ;
-const PlanetList = WithSwapiService(WithData(Wrapped(ItemList, renderName)), mapPlanetMethodsToProps);
-const StarshipList =WithSwapiService(WithData(Wrapped(ItemList, renderNameAndModel)), mapStarshipsMethodsToProps);
+const PersonList = WithSwapiService(WithData(Wrapped(ItemList)(renderName)))(mapPersonMethodsToProps) ;
+const PlanetList = WithSwapiService(WithData(Wrapped(ItemList)(renderName)))(mapPlanetMethodsToProps);
+const StarshipList =WithSwapiService(WithData(Wrapped(ItemList)(renderNameAndModel)))(mapStarshipsMethodsToProps);
 
 export {
     PersonList,
