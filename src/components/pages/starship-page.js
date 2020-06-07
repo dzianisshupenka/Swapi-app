@@ -9,7 +9,6 @@ export default class StarshipPage extends Component {
     }
 
     onItemSelected = (selectedItem) => {
-        debugger
         this.setState({selectedItem})
     }
 
