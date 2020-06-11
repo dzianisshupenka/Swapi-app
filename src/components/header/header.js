@@ -5,19 +5,19 @@ import {Link} from "react-router-dom";
 const Header = ({onServiceChange}) => {
     return <div className='nav '>
         <h3>
-            <a href="/people">
+            <Link to="/">
                 StarWars Database
-            </a>
+            </Link>
         </h3>
         <ul>
             <li>
-                <Link to='/people'>People</Link>
+                <Link to='/people/'>People</Link>
             </li>
             <li>
-                <Link to='/planets'>Planets</Link>
+                <Link to='/planets/'>Planets</Link>
             </li>
             <li>
-                <Link to='/starships'>Starships</Link>
+                <Link to='/starships/'>Starships</Link>
             </li>
             <button onClick={onServiceChange} className={"btn btn-primary"}>Change Context</button>
         </ul>

@@ -11,6 +11,7 @@ import PeoplePage from "../pages/people-page";
 import PlanetPage from "../pages/planet-page";
 import StarshipPage from "../pages/starship-page";
 import {BrowserRouter, Route} from "react-router-dom";
+import {StarshipDetails} from "../sw-components";
 
 export default class App extends Component {
     state = {
@@ -37,9 +38,14 @@ export default class App extends Component {
                     <BrowserRouter>
                         <Header onServiceChange={this.onServiceChange}/>
                         <RandomPlanet />
-                        <Route path='/people' component={PeoplePage} />
-                        <Route path='/planets' component={PlanetPage} />
-                        <Route path='/starships' component={StarshipPage} />
+                        <Route path='/' render={() => <h2>Welcome to StarDB!</h2>} exact/>
+                        <Route path='/people/:id?' component={PeoplePage} />
+                        <Route path='/planets/' component={PlanetPage} />
+                        <Route path='/starships/' exact component={StarshipPage} />
+                        <Route path='/starships/:id' render={({match}) => {
+                            const {id} = match.params;
+                            return <StarshipDetails itemId={id}/>
+                        }} />
                     </BrowserRouter>
                 </SwapiServiceProvider>
             </ErrorBoundary>
